@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style1.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <div class="container">
+        <h1>Currency Converter</h1>
+        <div class="form">
+        <form>
+            <label><h2>Enter amount</h2></label>
+            <input type="text" id="amt" required style="text-align: center;">
+           <div class="conv">
+            <div class="from">
+                <h3>From</h3>
+            <div>
+                <img src="https://flagsapi.com/AE/flat/64.png" id="from2">
+            <select class="countryf" onchange="d1()" required></select>
+            </div>
+            </div>
+            <br><br>
+            <i class="fa-solid fa-arrow-right-arrow-left fa-2xl" style="color: #000000;"></i>
+            <div class="to">
+                <h3>To</h3>
+            <div>
+                <img src="https://flagsapi.com/AE/flat/64.png" id="to2">
+            <select class="countryT" onchange="d2()" required></select>
+            </div>
+            </div>
+           </div>
+        </form>
+        </div>
+        <br>
+        <div class="msg"></div><br>
+        <div class="total"></div><br>
+        <input type="button" onclick="exchange()" value="Get exchange rate"/>
+    </div>
+
+
+    <script src="codes.js"></script>
+    <script>
+        let code = countryList;
+        function country(){
+            let first =``;
+        for(i in code){
+            console.log(i);
+           let c1=` <option value=${i}>${i}</option>`;
+           first += c1;
+        }
+        document.querySelector(".countryf").innerHTML=first;
+        document.querySelector(".countryT").innerHTML=first;     
+    }
+    country();
+
+    //FLAG CODE
+    function d1(){
+       let c1= document.querySelector('.countryf').value;
+       let f1 = code[c1];
+       document.getElementById("from2").setAttribute("src",`https://flagsapi.com/${f1}/flat/64.png`);
+    }
+    function d2(){
+        let c2= document.querySelector('.countryT').value;
+        let f2 = code[c2];
+        document.getElementById("to2").setAttribute("src",`https://flagsapi.com/${f2}/flat/64.png`);
+     }
+    //
+
+    //currency
+    function exchange(){
+        let amt = document.querySelector("#amt").value;
+        let c1= document.querySelector('.countryf').value;
+        let c2= document.querySelector('.countryT').value;
+        let url = `https://v6.exchangerate-api.com/v6/2c94b2bad52bc7c37ab10d77/latest/${c1}`;
+        let p = fetch(url);
+        let rate;
+        p.then((response)=>{
+          return  response.json();
+        })
+        .then((data)=>{
+            let items = data.conversion_rates;
+            for(i in items){
+                if(i==c2){
+                    rate = items[c2];
+                }
+            }
+            document.querySelector(".msg").innerHTML=`1 ${c1} = ${rate} ${c2}`;
+            let total = amt*rate;
+            document.querySelector(".total").innerHTML=`${amt} ${c1} = ${total} ${c2}`;
+        })
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,59 @@
+.container{
+    text-align: center;
+    height: 30%;
+    width:450px;
+    border:2px solid black;
+    margin-left: 33%;
+    margin-top: 10%;
+    background-color: white;
+    border-radius:20px;
+}
+.form{
+    display: flex;
+    justify-content: center;
+}
+select{
+    height: 30px;
+}
+form input,select{
+    width:100%;
+    border-radius: 20px;
+}
+select{
+    border:none;
+}
+body{
+    background-color: antiquewhite;
+}
+ input[type="button"]{
+    margin:20px;
+    border-radius: 10px;
+    background-color: rgb(66, 85, 210);
+    padding:10px;
+    color: white;
+    border: none;
+    width:60%;
+}
+input{
+    height: 30px;
+}
+.conv{
+    display:flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+img{
+    max-width: 2rem;
+}
+.from2,.to2{
+    display: flex;
+    border:2px solid black;
+    border-radius: 20px;
+    padding: 5px;
+}
+.from{
+    margin-right: 40px;
+}
+.to{
+    margin-left: 40px;
+}
